@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xavier CP | Senior Android Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --android-green: #3DDC84;
+            --tech-blue: #00F0FF;
+            --dark-bg: #050505;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* The 3D Canvas sits fixed behind everything */
+        .webgl {
+            position: fixed;
+            top: 0;
+            left: 0;
+            outline: none;
+            z-index: -1;
+            pointer-events: none; /* Let clicks pass through to HTML */
+        }
+
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(61, 220, 132, 0.3);
+            box-shadow: 0 0 30px rgba(61, 220, 132, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--android-green);
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--android-green), var(--tech-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        section {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="selection:bg-[#3DDC84] selection:text-black">
+
+    <!-- 3D Canvas -->
+    <canvas class="webgl"></canvas>
+
+    <!-- UI Overlay -->
+    <main class="w-full">
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-start px-8 md:px-24 max-w-7xl mx-auto">
+            <p class="font-mono text-[#3DDC84] mb-4 tracking-wider text-sm md:text-base">&gt; System initialized. Hello, I am</p>
+            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-4">
+                Xavier CP.
+            </h1>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-400 mb-6">
+                I engineer <span class="text-gradient">Android</span> experiences.
+            </h2>
+            <p class="max-w-2xl text-gray-400 text-lg md:text-xl leading-relaxed mb-10">
+                Accomplished Senior Software Engineer with expertise in native Android development, Kotlin, and Jetpack Compose. I build highly scalable, performant mobile applications that push boundaries.
+            </p>
+            <div class="flex gap-4">
+                <a href="#projects" class="px-8 py-4 bg-[#3DDC84] text-black font-bold rounded-full hover:bg-white transition-colors duration-300 flex items-center gap-2">
+                    <i class="ph ph-rocket-launch text-xl"></i> View Projects
+                </a>
+                <a href="#contact" class="px-8 py-4 glass-panel font-bold rounded-full hover:text-[#3DDC84] transition-colors duration-300">
+                    Contact Me
+                </a>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center text-gray-500">
+                <span class="font-mono text-xs mb-2">SCROLL</span>
+                <i class="ph ph-arrow-down text-xl"></i>
+            </div>
+        </section>
+
+        <!-- Key Achievement Section -->
+        <section class="min-h-[50vh] flex items-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="about">
+            <div class="glass-panel p-8 md:p-12 w-full relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-[#3DDC84] to-[#00F0FF]"></div>
+                <i class="ph-fill ph-trophy text-4xl text-[#3DDC84] mb-4"></i>
+                <h3 class="text-2xl md:text-3xl font-bold mb-4">Key Achievement</h3>
+                <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
+                    Partnered with <strong class="text-white">Samsung</strong> to develop an innovative Android TV app solution for schools in India, significantly enhancing educational accessibility and delivering interactive learning experiences at scale.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="skills">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 flex items-center gap-4">
+                <span class="text-gradient">01.</span> Technical Arsenal
+            </h2>
+            <div class="flex flex-wrap gap-3 md:gap-4">
+                <!-- Skill Chips -->
+                <script>
+                    const skills = [
+                        "Kotlin", "Java", "Jetpack Compose", "Android SDK", "Coroutines", "Flow",
+                        "RESTful Services", "OkHttp", "Retrofit", "Dagger/Hilt", "Firebase", 
+                        "MVVM / Clean Architecture", "Git & Gitflow", "CI/CD (GitHub Actions, Circle CI)", 
+                        "Gradle", "Unit & Integration Testing", "Mixpanel", "Android TV"
+                    ];
+                    skills.forEach(skill => {
+                        document.write(`<div class="glass-panel px-6 py-3 font-mono text-sm md:text-base text-gray-200 hover:text-[#3DDC84] cursor-default">${skill}</div>`);
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="experience">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 flex items-center gap-4">
+                <span class="text-gradient">02.</span> Experience
+            </h2>
+            <div class="space-y-12 border-l-2 border-gray-800 ml-4 md:ml-6 pl-8 md:pl-12 relative">
+                
+                <!-- Job 1 -->
+                <div class="relative">
+                    <div class="absolute w-4 h-4 bg-[#3DDC84] rounded-full -left-[41px] md:-left-[57px] top-1.5 shadow-[0_0_15px_#3DDC84]"></div>
+                    <h3 class="text-2xl font-bold">Senior Software Engineer (Android)</h3>
+                    <p class="text-xl text-gray-400 font-medium mb-2">2Base Technologies Pvt Ltd | Kochi</p>
+                    <p class="font-mono text-[#3DDC84] text-sm mb-4">03/2021 — Current</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2 text-gray-300">
+                        <li>Led design and development of advanced Android & Android TV applications.</li>
+                        <li>Implemented CI/CD pipelines and testing automation (Gradle, GitHub Actions, Circle CI).</li>
+                        <li>Utilized modern stacks: Jetpack Compose, Coroutines, Flow, Dagger.</li>
+                        <li>Architected robust solutions, modernized legacy code, and mentored junior engineers.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="relative">
+                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-[41px] md:-left-[57px] top-1.5"></div>
+                    <h3 class="text-2xl font-bold">Software Engineer (Android)</h3>
+                    <p class="text-xl text-gray-400 font-medium mb-2">Ayoxa Advertisements Pvt Ltd | Kochi</p>
+                    <p class="font-mono text-gray-500 text-sm mb-4">11/2019 — 03/2021</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2 text-gray-300">
+                        <li>Developed responsive features using Kotlin & Java focusing on performance.</li>
+                        <li>Integrated real-time data synchronization with Firebase.</li>
+                        <li>Optimized RESTful APIs integration using Retrofit & OkHttp.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="relative">
+                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-[41px] md:-left-[57px] top-1.5"></div>
+                    <h3 class="text-2xl font-bold">Junior Software Engineer (Android)</h3>
+                    <p class="text-xl text-gray-400 font-medium mb-2">Tekquik Retail Technologies | Kochi</p>
+                    <p class="font-mono text-gray-500 text-sm mb-4">10/2018 — 11/2019</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2 text-gray-300">
+                        <li>Handled end-to-end Android app development from prototyping to production.</li>
+                        <li>Built responsive UIs with ConstraintLayout and RecyclerView.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="projects">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 flex items-center gap-4">
+                <span class="text-gradient">03.</span> Featured Apps
+            </h2>
+            <p class="text-gray-400 mb-12">Applications I've built and deployed to the Play Store.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <a href="https://play.google.com/store/apps/details?id=com.twobasetechnologies.skoolbeep" target="_blank" class="block">
+                    <div class="glass-panel p-8 h-full flex flex-col relative group">
+                        <div class="absolute top-4 right-4 text-gray-500 group-hover:text-[#3DDC84] transition-colors"><i class="ph ph-arrow-up-right text-2xl"></i></div>
+                        <i class="ph-fill ph-graduation-cap text-4xl text-[#3DDC84] mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Skoolbeep</h3>
+                        <p class="text-sm font-mono text-gray-400 mb-4">2Base Technologies</p>
+                        <p class="text-gray-300 mt-auto">Comprehensive school management and communication platform.</p>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://play.google.com/store/apps/details?id=com.lyforg.doctor" target="_blank" class="block">
+                    <div class="glass-panel p-8 h-full flex flex-col relative group">
+                        <div class="absolute top-4 right-4 text-gray-500 group-hover:text-[#3DDC84] transition-colors"><i class="ph ph-arrow-up-right text-2xl"></i></div>
+                        <i class="ph-fill ph-stethoscope text-4xl text-[#00F0FF] mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Lyforg Doctor</h3>
+                        <p class="text-sm font-mono text-gray-400 mb-4">2Base Technologies</p>
+                        <p class="text-gray-300 mt-auto">Healthcare professional app for managing appointments and patient records.</p>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://play.google.com/store/apps/details?id=com.lyforg.patient" target="_blank" class="block">
+                    <div class="glass-panel p-8 h-full flex flex-col relative group">
+                        <div class="absolute top-4 right-4 text-gray-500 group-hover:text-[#3DDC84] transition-colors"><i class="ph ph-arrow-up-right text-2xl"></i></div>
+                        <i class="ph-fill ph-heartbeat text-4xl text-[#00F0FF] mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Lyforg Patient</h3>
+                        <p class="text-sm font-mono text-gray-400 mb-4">2Base Technologies</p>
+                        <p class="text-gray-300 mt-auto">Patient-facing healthcare app for booking consultations and health tracking.</p>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="https://play.google.com/store/apps/details?id=com.xeles.watchai" target="_blank" class="block">
+                    <div class="glass-panel p-8 h-full flex flex-col relative group border-t-2 border-t-[#3DDC84]/50">
+                        <div class="absolute top-4 right-4 text-gray-500 group-hover:text-[#3DDC84] transition-colors"><i class="ph ph-arrow-up-right text-2xl"></i></div>
+                        <i class="ph-fill ph-watch text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Watch AI</h3>
+                        <p class="text-sm font-mono text-[#3DDC84] mb-4">Personal Project</p>
+                        <p class="text-gray-300 mt-auto">AI-powered smartwatch companion application.</p>
+                    </div>
+                </a>
+
+                <!-- Project 5 -->
+                <a href="https://play.google.com/store/apps/details?id=com.xeles.offlineaikeyboard" target="_blank" class="block">
+                    <div class="glass-panel p-8 h-full flex flex-col relative group border-t-2 border-t-[#3DDC84]/50">
+                        <div class="absolute top-4 right-4 text-gray-500 group-hover:text-[#3DDC84] transition-colors"><i class="ph ph-arrow-up-right text-2xl"></i></div>
+                        <i class="ph-fill ph-keyboard text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Offline AI Keyboard</h3>
+                        <p class="text-sm font-mono text-[#3DDC84] mb-4">Personal Project</p>
+                        <p class="text-gray-300 mt-auto">Privacy-first, on-device AI keyboard application.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer / Contact -->
+        <footer class="py-20 px-8 flex flex-col items-center justify-center text-center border-t border-gray-900" id="contact">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Build Something.</h2>
+            <p class="text-gray-400 mb-10 max-w-lg">
+                Currently based in Kochi, India. I'm always open to discussing new opportunities, architecture challenges, or Android innovations.
+            </p>
+            <a href="mailto:cpxavier2@gmail.com" class="px-8 py-4 border-2 border-[#3DDC84] text-[#3DDC84] font-bold rounded-full hover:bg-[#3DDC84] hover:text-black transition-all duration-300 text-lg mb-12">
+                Say Hello
+            </a>
+            
+            <div class="flex gap-6 mb-8">
+                <a href="https://www.linkedin.com/in/xavier-cp" target="_blank" class="text-gray-500 hover:text-white transition-colors">
+                    <i class="ph-fill ph-linkedin-logo text-3xl"></i>
+                </a>
+                <a href="mailto:cpxavier2@gmail.com" class="text-gray-500 hover:text-white transition-colors">
+                    <i class="ph-fill ph-envelope-simple text-3xl"></i>
+                </a>
+            </div>
+            
+            <p class="font-mono text-sm text-gray-600">Built with Three.js & Tailwind CSS <br> © 2026 Xavier CP</p>
+        </footer>
+
+    </main>
+
+    <!-- Three.js and GSAP Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        /**
+         * 3D WebGL Background Script
+         */
+
+        // 1. Setup Canvas and Scene
+        const canvas = document.querySelector('canvas.webgl');
+        const scene = new THREE.Scene();
+
+        // 2. Objects (Representing Tech/Code/Android)
+        const objectsDistance = 4; // Distance between objects on Y axis
+        const objects = [];
+
+        // Materials
+        const materialGreen = new THREE.MeshStandardMaterial({ 
+            color: 0x3DDC84, // Android Green
+            wireframe: true,
+            emissive: 0x3DDC84,
+            emissiveIntensity: 0.2
+        });
+        const materialBlue = new THREE.MeshStandardMaterial({ 
+            color: 0x00F0FF, 
+            wireframe: true,
+            emissive: 0x00F0FF,
+            emissiveIntensity: 0.2
+        });
+        const materialPurple = new THREE.MeshStandardMaterial({ 
+            color: 0x9D4EDD, 
+            wireframe: true 
+        });
+
+        // Object 1: Torus Knot (Hero)
+        const mesh1 = new THREE.Mesh(
+            new THREE.TorusKnotGeometry(0.8, 0.3, 100, 16),
+            materialGreen
+        );
+        
+        // Object 2: Icosahedron (About/Achievement)
+        const mesh2 = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(1.2, 0),
+            materialBlue
+        );
+
+        // Object 3: Octahedron (Skills)
+        const mesh3 = new THREE.Mesh(
+            new THREE.OctahedronGeometry(1, 0),
+            materialGreen
+        );
+
+        // Object 4: Torus (Experience)
+        const mesh4 = new THREE.Mesh(
+            new THREE.TorusGeometry(1, 0.4, 16, 60),
+            materialPurple
+        );
+
+        // Object 5: Cube (Projects)
+        const mesh5 = new THREE.Mesh(
+            new THREE.BoxGeometry(1.5, 1.5, 1.5),
+            materialBlue
+        );
+
+        // Position objects down the Y axis
+        mesh1.position.y = -objectsDistance * 0;
+        mesh2.position.y = -objectsDistance * 1;
+        mesh3.position.y = -objectsDistance * 2;
+        mesh4.position.y = -objectsDistance * 3;
+        mesh5.position.y = -objectsDistance * 4;
+
+        // Position them left/right alternatively
+        mesh1.position.x = 2;
+        mesh2.position.x = -2;
+        mesh3.position.x = 2;
+        mesh4.position.x = -2;
+        mesh5.position.x = 2;
+
+        scene.add(mesh1, mesh2, mesh3, mesh4, mesh5);
+        objects.push(mesh1, mesh2, mesh3, mesh4, mesh5);
+
+        // 3. Particles (Starfield/Dataflow effect)
+        const particlesCount = 1000;
+        const positions = new Float32Array(particlesCount * 3);
+        const particleColors = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount; i++) {
+            // Position
+            positions[i * 3 + 0] = (Math.random() - 0.5) * 10; // x
+            positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * 6; // y
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // z
+
+            // Color (Mix of grey and green)
+            const isGreen = Math.random() > 0.8;
+            particleColors[i * 3 + 0] = isGreen ? 0.23 : 0.4; // r
+            particleColors[i * 3 + 1] = isGreen ? 0.86 : 0.4; // g
+            particleColors[i * 3 + 2] = isGreen ? 0.51 : 0.4; // b
+        }
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            sizeAttenuation: true,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        // 4. Lights
+        const directionalLight = new THREE.DirectionalLight('#ffffff', 1);
+        directionalLight.position.set(1, 1, 0);
+        scene.add(directionalLight);
+        
+        const ambientLight = new THREE.AmbientLight('#ffffff', 0.2);
+        scene.add(ambientLight);
+
+        // 5. Screen Sizes
+        const sizes = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+
+        window.addEventListener('resize', () => {
+            sizes.width = window.innerWidth;
+            sizes.height = window.innerHeight;
+            camera.aspect = sizes.width / sizes.height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(sizes.width, sizes.height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Adjust object X position on mobile
+            if(sizes.width < 768) {
+                objects.forEach(obj => obj.position.x = 0);
+            } else {
+                mesh1.position.x = 2;
+                mesh2.position.x = -2;
+                mesh3.position.x = 2;
+                mesh4.position.x = -2;
+                mesh5.position.x = 2;
+            }
+        });
+
+        // Responsive initial load
+        if(sizes.width < 768) {
+            objects.forEach(obj => obj.position.x = 0);
+        }
+
+        // 6. Camera
+        const cameraGroup = new THREE.Group();
+        scene.add(cameraGroup);
+
+        const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100);
+        camera.position.z = 6;
+        cameraGroup.add(camera);
+
+        // 7. Renderer
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true, // transparent background so CSS color shows
+            antialias: true
+        });
+        renderer.setSize(sizes.width, sizes.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // 8. Scroll Logic (Parallax effect)
+        let scrollY = window.scrollY;
+        let currentSection = 0;
+
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+            const newSection = Math.round(scrollY / sizes.height);
+
+            if (newSection !== currentSection) {
+                currentSection = newSection;
+                
+                // Add a little spin animation when entering a new section
+                if(objects[currentSection]) {
+                    gsap.to(
+                        objects[currentSection].rotation,
+                        {
+                            duration: 1.5,
+                            ease: 'power2.inOut',
+                            x: '+=6',
+                            y: '+=3',
+                            z: '+=1.5'
+                        }
+                    );
+                }
+            }
+        });
+
+        // 9. Cursor/Mouse interaction logic
+        const cursor = { x: 0, y: 0 };
+        window.addEventListener('mousemove', (event) => {
+            cursor.x = event.clientX / sizes.width - 0.5;
+            cursor.y = event.clientY / sizes.height - 0.5;
+        });
+
+        // 10. Animation Loop
+        const clock = new THREE.Clock();
+        let previousTime = 0;
+
+        const tick = () => {
+            const elapsedTime = clock.getElapsedTime();
+            const deltaTime = elapsedTime - previousTime;
+            previousTime = elapsedTime;
+
+            // Animate camera on scroll
+            camera.position.y = -scrollY / sizes.height * objectsDistance;
+
+            // Animate camera on mouse move (Parallax)
+            const parallaxX = cursor.x * 0.5;
+            const parallaxY = -cursor.y * 0.5;
+            
+            // Smoothing the parallax with lerp
+            cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
+            cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
+
+            // Rotate objects continuously
+            for (const object of objects) {
+                object.rotation.x += deltaTime * 0.1;
+                object.rotation.y += deltaTime * 0.12;
+            }
+
+            // Animate particles slowly upwards
+            particles.rotation.y = elapsedTime * 0.02;
+
+            renderer.render(scene, camera);
+            window.requestAnimationFrame(tick);
+        };
+
+        // Start loop
+        tick();
+
+    </script>
+</body>
+</html>
