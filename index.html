@@ -29,6 +29,25 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            cursor: none !important;
+        }
+
+        a, button, [role="button"], .cursor-pointer, .glass-panel {
+            cursor: none !important;
+        }
+
+        #custom-cursor {
+            position: fixed;
+            top: -100px;
+            left: -100px;
+            width: 32px;
+            height: 32px;
+            margin-left: -16px;
+            margin-top: -16px;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: left, top, transform;
+            transition: transform 0.1s ease-out;
         }
 
         /* The 3D Canvas sits fixed behind everything */
@@ -89,6 +108,8 @@
     </style>
 </head>
 <body class="selection:bg-[#3DDC84] selection:text-black">
+
+    <img id="custom-cursor" src="android-3d-cursor.png" alt="cursor">
 
     <!-- 3D Canvas -->
     <canvas class="webgl"></canvas>
@@ -493,9 +514,36 @@
 
         // 9. Cursor/Mouse interaction logic
         const cursor = { x: 0, y: 0 };
+        const customCursorEl = document.getElementById('custom-cursor');
+        let cursorLastX = 0;
+        let cursorLastY = 0;
+        let cursorTargetAngle = 0;
+
         window.addEventListener('mousemove', (event) => {
+            // Update ThreeJS background cursor variables
             cursor.x = event.clientX / sizes.width - 0.5;
             cursor.y = event.clientY / sizes.height - 0.5;
+
+            // Move the custom cursor to exact mouse position
+            customCursorEl.style.left = event.clientX + 'px';
+            customCursorEl.style.top = event.clientY + 'px';
+
+            const dx = event.clientX - cursorLastX;
+            const dy = event.clientY - cursorLastY;
+
+            // Update rotation only when cursor moves noticeably
+            if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+                const angleRad = Math.atan2(dy, dx);
+                // Math.atan2 is 0 when moving Right. Our image head typically points Up.
+                // Up equals -90 deg logically. Right equals 0 deg.
+                // Assuming original pixel image head is facing UP (0 deg local).
+                cursorTargetAngle = (angleRad * 180 / Math.PI) + 90;
+
+                cursorLastX = event.clientX;
+                cursorLastY = event.clientY;
+            }
+
+            customCursorEl.style.transform = `rotate(${cursorTargetAngle}deg)`;
         });
 
         // 10. Animation Loop
