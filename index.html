@@ -50,6 +50,16 @@
             transition: transform 0.1s ease-out;
         }
 
+        /* Hide custom cursor on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            body, a, button, [role="button"], .cursor-pointer, .glass-panel {
+                cursor: auto !important;
+            }
+            #custom-cursor {
+                display: none !important;
+            }
+        }
+
         /* The 3D Canvas sits fixed behind everything */
         .webgl {
             position: fixed;
@@ -60,6 +70,13 @@
             pointer-events: none; /* Let clicks pass through to HTML */
         }
 
+        /* Lower opacity of 3D canvas on mobile so text is readable */
+        @media (max-width: 767px) {
+            .webgl {
+                opacity: 0.15;
+            }
+        }
+
         /* Glassmorphism utility */
         .glass-panel {
             background: rgba(255, 255, 255, 0.03);
@@ -67,13 +84,16 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .glass-panel:hover {
-            border-color: rgba(61, 220, 132, 0.3);
-            box-shadow: 0 0 30px rgba(61, 220, 132, 0.1);
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
+        /* Only apply hover lift on devices that support hover */
+        @media (hover: hover) {
+            .glass-panel:hover {
+                border-color: rgba(61, 220, 132, 0.3);
+                box-shadow: 0 0 30px rgba(61, 220, 132, 0.1);
+                transform: translateY(-5px);
+            }
         }
 
         /* Custom Scrollbar */
@@ -105,6 +125,54 @@
             position: relative;
             z-index: 10;
         }
+
+        /* Mobile typography & spacing fixes */
+        @media (max-width: 767px) {
+            /* Hero section */
+            .hero-title {
+                font-size: 2.75rem !important;
+                line-height: 1.1;
+            }
+            .hero-subtitle {
+                font-size: 1.5rem !important;
+            }
+            .hero-desc {
+                font-size: 1rem !important;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-buttons a {
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Experience timeline fix */
+            .timeline-container {
+                margin-left: 0.5rem !important;
+                padding-left: 1.5rem !important;
+            }
+            .timeline-dot {
+                left: -25px !important;
+            }
+            .timeline-container h3 {
+                font-size: 1.25rem !important;
+            }
+            .timeline-container .job-company {
+                font-size: 0.95rem !important;
+            }
+
+            /* Section titles */
+            .section-title {
+                font-size: 1.75rem !important;
+            }
+
+            /* Footer */
+            .footer-title {
+                font-size: 1.75rem !important;
+            }
+        }
     </style>
 </head>
 <body class="selection:bg-[#3DDC84] selection:text-black">
@@ -118,22 +186,22 @@
     <main class="w-full">
         
         <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center items-start px-8 md:px-24 max-w-7xl mx-auto">
+        <section class="min-h-screen flex flex-col justify-center items-start px-6 md:px-24 max-w-7xl mx-auto">
             <p class="font-mono text-[#3DDC84] mb-4 tracking-wider text-sm md:text-base">&gt; System initialized. Hello, I am</p>
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-4">
+            <h1 class="hero-title text-6xl md:text-8xl font-extrabold tracking-tighter mb-4">
                 Xavier CP.
             </h1>
-            <h2 class="text-3xl md:text-5xl font-bold text-gray-400 mb-6">
+            <h2 class="hero-subtitle text-3xl md:text-5xl font-bold text-gray-400 mb-6">
                 I engineer <span class="text-gradient">Android</span> experiences.
             </h2>
-            <p class="max-w-2xl text-gray-400 text-lg md:text-xl leading-relaxed mb-10">
+            <p class="hero-desc max-w-2xl text-gray-400 text-lg md:text-xl leading-relaxed mb-10">
                 Accomplished Senior Software Engineer with expertise in native Android development, Kotlin, and Jetpack Compose. I build highly scalable, performant mobile applications that push boundaries.
             </p>
-            <div class="flex gap-4">
-                <a href="#projects" class="px-8 py-4 bg-[#3DDC84] text-black font-bold rounded-full hover:bg-white transition-colors duration-300 flex items-center gap-2">
+            <div class="hero-buttons flex gap-4">
+                <a href="#projects" class="px-6 md:px-8 py-4 bg-[#3DDC84] text-black font-bold rounded-full hover:bg-white transition-colors duration-300 flex items-center gap-2">
                     <i class="ph ph-rocket-launch text-xl"></i> View Projects
                 </a>
-                <a href="#contact" class="px-8 py-4 glass-panel font-bold rounded-full hover:text-[#3DDC84] transition-colors duration-300">
+                <a href="#contact" class="px-6 md:px-8 py-4 glass-panel font-bold rounded-full hover:text-[#3DDC84] transition-colors duration-300">
                     Contact Me
                 </a>
             </div>
@@ -145,20 +213,20 @@
         </section>
 
         <!-- Key Achievement Section -->
-        <section class="min-h-[50vh] flex items-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="about">
-            <div class="glass-panel p-8 md:p-12 w-full relative overflow-hidden">
+        <section class="min-h-[50vh] flex items-center px-6 md:px-24 max-w-7xl mx-auto py-16 md:py-20" id="about">
+            <div class="glass-panel p-6 md:p-12 w-full relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-[#3DDC84] to-[#00F0FF]"></div>
                 <i class="ph-fill ph-trophy text-4xl text-[#3DDC84] mb-4"></i>
-                <h3 class="text-2xl md:text-3xl font-bold mb-4">Key Achievement</h3>
-                <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
+                <h3 class="text-xl md:text-3xl font-bold mb-4">Key Achievement</h3>
+                <p class="text-gray-300 text-base md:text-xl leading-relaxed">
                     Partnered with <strong class="text-white">Samsung</strong> to develop an innovative Android TV app solution for schools in India, significantly enhancing educational accessibility and delivering interactive learning experiences at scale.
                 </p>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="skills">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12 flex items-center gap-4">
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-24 max-w-7xl mx-auto py-16 md:py-20" id="skills">
+            <h2 class="section-title text-4xl md:text-5xl font-bold mb-8 md:mb-12 flex items-center gap-3 md:gap-4">
                 <span class="text-gradient">01.</span> Technical Arsenal
             </h2>
             <div class="flex flex-wrap gap-3 md:gap-4">
@@ -178,17 +246,17 @@
         </section>
 
         <!-- Experience Section -->
-        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="experience">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12 flex items-center gap-4">
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-24 max-w-7xl mx-auto py-16 md:py-20" id="experience">
+            <h2 class="section-title text-4xl md:text-5xl font-bold mb-8 md:mb-12 flex items-center gap-3 md:gap-4">
                 <span class="text-gradient">02.</span> Experience
             </h2>
-            <div class="space-y-12 border-l-2 border-gray-800 ml-4 md:ml-6 pl-8 md:pl-12 relative">
+            <div class="timeline-container space-y-10 md:space-y-12 border-l-2 border-gray-800 ml-2 md:ml-6 pl-6 md:pl-12 relative">
                 
                 <!-- Job 1 -->
                 <div class="relative">
-                    <div class="absolute w-4 h-4 bg-[#3DDC84] rounded-full -left-[41px] md:-left-[57px] top-1.5 shadow-[0_0_15px_#3DDC84]"></div>
-                    <h3 class="text-2xl font-bold">Senior Software Engineer (Android)</h3>
-                    <p class="text-xl text-gray-400 font-medium mb-2">2Base Technologies Pvt Ltd | Kochi</p>
+                    <div class="timeline-dot absolute w-4 h-4 bg-[#3DDC84] rounded-full -left-[33px] md:-left-[57px] top-1.5 shadow-[0_0_15px_#3DDC84]"></div>
+                    <h3 class="text-xl md:text-2xl font-bold">Senior Software Engineer (Android)</h3>
+                    <p class="job-company text-base md:text-xl text-gray-400 font-medium mb-2">2Base Technologies Pvt Ltd | Kochi</p>
                     <p class="font-mono text-[#3DDC84] text-sm mb-4">03/2021 — Current</p>
                     <ul class="list-disc list-outside ml-4 space-y-2 text-gray-300">
                         <li>Led design and development of advanced Android & Android TV applications.</li>
@@ -200,9 +268,9 @@
 
                 <!-- Job 2 -->
                 <div class="relative">
-                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-[41px] md:-left-[57px] top-1.5"></div>
-                    <h3 class="text-2xl font-bold">Software Engineer (Android)</h3>
-                    <p class="text-xl text-gray-400 font-medium mb-2">Ayoxa Advertisements Pvt Ltd | Kochi</p>
+                    <div class="timeline-dot absolute w-4 h-4 bg-gray-600 rounded-full -left-[33px] md:-left-[57px] top-1.5"></div>
+                    <h3 class="text-xl md:text-2xl font-bold">Software Engineer (Android)</h3>
+                    <p class="job-company text-base md:text-xl text-gray-400 font-medium mb-2">Ayoxa Advertisements Pvt Ltd | Kochi</p>
                     <p class="font-mono text-gray-500 text-sm mb-4">11/2019 — 03/2021</p>
                     <ul class="list-disc list-outside ml-4 space-y-2 text-gray-300">
                         <li>Developed responsive features using Kotlin & Java focusing on performance.</li>
@@ -213,9 +281,9 @@
 
                 <!-- Job 3 -->
                 <div class="relative">
-                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-[41px] md:-left-[57px] top-1.5"></div>
-                    <h3 class="text-2xl font-bold">Junior Software Engineer (Android)</h3>
-                    <p class="text-xl text-gray-400 font-medium mb-2">Tekquik Retail Technologies | Kochi</p>
+                    <div class="timeline-dot absolute w-4 h-4 bg-gray-600 rounded-full -left-[33px] md:-left-[57px] top-1.5"></div>
+                    <h3 class="text-xl md:text-2xl font-bold">Junior Software Engineer (Android)</h3>
+                    <p class="job-company text-base md:text-xl text-gray-400 font-medium mb-2">Tekquik Retail Technologies | Kochi</p>
                     <p class="font-mono text-gray-500 text-sm mb-4">10/2018 — 11/2019</p>
                     <ul class="list-disc list-outside ml-4 space-y-2 text-gray-300">
                         <li>Handled end-to-end Android app development from prototyping to production.</li>
@@ -226,8 +294,8 @@
         </section>
 
         <!-- Projects Section -->
-        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24 max-w-7xl mx-auto py-20" id="projects">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 flex items-center gap-4">
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-24 max-w-7xl mx-auto py-16 md:py-20" id="projects">
+            <h2 class="section-title text-4xl md:text-5xl font-bold mb-4 flex items-center gap-3 md:gap-4">
                 <span class="text-gradient">03.</span> Featured Apps
             </h2>
             <p class="text-gray-400 mb-12">Applications I've built and deployed to the Play Store.</p>
@@ -291,8 +359,8 @@
         </section>
 
         <!-- Footer / Contact -->
-        <footer class="py-20 px-8 flex flex-col items-center justify-center text-center border-t border-gray-900" id="contact">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Build Something.</h2>
+        <footer class="py-16 md:py-20 px-6 md:px-8 flex flex-col items-center justify-center text-center border-t border-gray-900" id="contact">
+            <h2 class="footer-title text-4xl md:text-5xl font-bold mb-6">Let's Build Something.</h2>
             <p class="text-gray-400 mb-10 max-w-lg">
                 Currently based in Kochi, India. I'm always open to discussing new opportunities, architecture challenges, or Android innovations.
             </p>
@@ -451,21 +519,37 @@
             renderer.setSize(sizes.width, sizes.height);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             
-            // Adjust object X position on mobile
+            // Adjust object position and scale on mobile
             if(sizes.width < 768) {
-                objects.forEach(obj => obj.position.x = 0);
+                objects.forEach(obj => {
+                    obj.position.x = 0;
+                    obj.scale.set(0.3, 0.3, 0.3);
+                });
+                // Push objects further back on z-axis so they don't overlap text
+                objects.forEach(obj => {
+                    obj.position.z = -5;
+                });
             } else {
                 mesh1.position.x = 2;
                 mesh2.position.x = -2;
                 mesh3.position.x = 2;
                 mesh4.position.x = -2;
                 mesh5.position.x = 2;
+                objects.forEach(obj => {
+                    obj.scale.set(1, 1, 1);
+                    obj.position.z = 0;
+                });
             }
         });
 
         // Responsive initial load
-        if(sizes.width < 768) {
-            objects.forEach(obj => obj.position.x = 0);
+        const isMobile = sizes.width < 768;
+        if(isMobile) {
+            objects.forEach(obj => {
+                obj.position.x = 0;
+                obj.scale.set(0.3, 0.3, 0.3);
+                obj.position.z = -5;
+            });
         }
 
         // 6. Camera
